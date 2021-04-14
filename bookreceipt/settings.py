@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-7=er9c7sxw2z%sz#_%7z4-h%0sh1+v-s^unxm%$vu2)2y8&37=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
@@ -158,10 +158,10 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CELERY_BROKER_URL = 'redis://:p7511bd3164a530aac32b91969dbeac195b524c1133288bf6abea6ad436978a67@ec2-34-236-139-54.compute-1.amazonaws.com:15260'
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
-# BROKER_POOL_LIMIT = 1
+BROKER_POOL_LIMIT = 1
 
 django_heroku.settings(locals())
 
