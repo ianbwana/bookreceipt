@@ -166,7 +166,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CELERY_BROKER_URL = 'amqps://xeksbupr:coH8n4vUGcgOSk90txvPX7FsFEJXE47w@fish.rmq.cloudamqp.com/xeksbupr'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
-BROKER_POOL_LIMIT = 1
+BROKER_POOL_LIMIT = 3
 CELERY_TIMEZONE = 'Africa/Nairobi'
 
 django_heroku.settings(locals())
