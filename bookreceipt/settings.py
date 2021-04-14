@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7=er9c7sxw2z%sz#_%7z4-h%0sh1+v-s^unxm%$vu2)2y8&37='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 
 # Application definition
@@ -48,6 +51,8 @@ INSTALLED_APPS = [
 
 
 
+
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -64,6 +69,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# CACHES = {
+#     "default": {
+#          "BACKEND": "redis_cache.RedisCache",
+#          "LOCATION": os.environ.get('REDIS_URL'),
+#     }
+# }
 
 ROOT_URLCONF = 'bookreceipt.urls'
 
@@ -136,6 +148,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # Default primary key field type
@@ -143,6 +156,10 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CELERY_BROKER_URL = 'redis://:p78f0c7fc0c5d790397d642bb8540baabfe476b462d0359c2a44613f4411f574d@ec2-54-220-147-151.eu-west-1.compute.amazonaws.com:13630'
+CELERY_BROKER_URL = 'redis://:p7511bd3164a530aac32b91969dbeac195b524c1133288bf6abea6ad436978a67@ec2-34-236-139-54.compute-1.amazonaws.com:15260'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+# BROKER_POOL_LIMIT = 1
+
+django_heroku.settings(locals())
+
