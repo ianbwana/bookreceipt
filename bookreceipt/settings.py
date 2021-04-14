@@ -163,7 +163,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_BROKER_URL = 'amqps://uioppylf:JVCERbTnYo7eoYHbgJReDDTRu1pXhyoa@fish.rmq.cloudamqp.com/uioppylf'
+CELERY_BROKER_URL = 'amqps://xeksbupr:coH8n4vUGcgOSk90txvPX7FsFEJXE47w@fish.rmq.cloudamqp.com/xeksbupr'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 BROKER_POOL_LIMIT = 1
