@@ -16,7 +16,10 @@ coreschema==0.0.4
 cryptography==3.4.7
 decorator==5.0.6
 defusedxml==0.7.1
+dj-database-url==0.5.0
 Django==3.2
+django-celery-beat==2.2.0
+django-celery-results==2.0.1
 django-compat==1.0.15
 django-extensions==3.1.2
 django-heroku==0.3.1
@@ -41,6 +44,7 @@ parso==0.8.2
 pexpect==4.8.0
 pickleshare==0.7.5
 prompt-toolkit==3.0.18
+psycopg2==2.8.6
 psycopg2-binary==2.8.6
 ptyprocess==0.7.0
 pycparser==2.20
