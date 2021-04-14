@@ -6,6 +6,10 @@ from .models import LoanAmount, Loan
 
 @receiver(post_save, sender=Loan)
 def create_loan_amount(sender, instance, created=False, **kwargs):
-    amount = instance.amount
-    LoanAmount.objects.create(loan=instance, amount=amount)
-    print("amount added")
+    print("Loan created/altered")
+    try:
+        amount = instance.amount
+        LoanAmount.objects.create(loan=instance, amount=amount)
+        print("amount added")
+    except Exception as e:
+        print("{}".format(e))

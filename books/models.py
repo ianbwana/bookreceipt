@@ -56,3 +56,6 @@ class LoanAmount(models.Model):
         null=True
     )
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{} {}".format(self.loan.user.username, self.loan.id)

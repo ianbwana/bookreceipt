@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7=er9c7sxw2z%sz#_%7z4-h%0sh1+v-s^unxm%$vu2)2y8&37='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'api',
     'accounts',
     'books',
-    'django_extensions'
+    'django_extensions',
+    'django_celery_beat',
+    'django_celery_results'
 ]
 
 
@@ -159,9 +161,21 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_BROKER_URL = 'amqps://uioppylf:JVCERbTnYo7eoYHbgJReDDTRu1pXhyoa@fish.rmq.cloudamqp.com/uioppylf'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 BROKER_POOL_LIMIT = 1
+CELERY_TIMEZONE = 'Africa/Nairobi'
+# Let's make things happen
+# CELERY_BEAT_SCHEDULE = {
+#  'send-summary-every-hour': {
+#        # 'task': 'summary',
+#         # There are 4 ways we can handle time, read further
+#        'schedule': 3600.0 * 24,
+#         # If you're using any arguments
+#        # 'args': (‘We don’t need any’,),
+#     },
+# }
 
 django_heroku.settings(locals())
 
