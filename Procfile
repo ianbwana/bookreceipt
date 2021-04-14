@@ -1,1 +1,1 @@
-web:gunicorn bookreceipt.wsgi
+web: gunicorn bookreceipt.wsgi
