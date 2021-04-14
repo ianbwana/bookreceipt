@@ -44,21 +44,38 @@ class UserLoansView(generics.ListCreateAPIView):
         return queryset
 
     def post(self, request, *args, **kwargs):
-
+        global user
+        global amount
         if "userid" in self.kwargs and self.kwargs["userid"]:
             user = self.kwargs["userid"]
             user_profile = Profile.objects.get(user__id=user)
-            # book_instance = Book.objects.get(id=request.data['book'])
-            data = {
-                "user": user,
-                "book": request.data['book'],
-                }
-            serializer = LoanSerializer(data=data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            print(serializer.errors)
-            return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+            book_instance = Book.objects.get(id=request.data['book'])
+
+            if user_profile.story == "story one":
+                amount = 1
+            elif user_profile.story == "story two":
+                if book_instance.book_type == "regular" or book_instance.book_type == "novel":
+                    amount = 1.5
+                else:
+                    amount = 3
+            else:
+                amount = 1.5
+
+            if user_profile.story == "story three":
+                pass
+
+        final_amount = amount
+        data = {
+            "user": user,
+            "book": request.data['book'],
+            "amount": final_amount
+        }
+        serializer = LoanSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer.errors)
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserProfileView(generics.RetrieveUpdateAPIView):

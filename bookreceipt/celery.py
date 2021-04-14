@@ -1,6 +1,9 @@
+from __future__ import absolute_import, unicode_literals
 import os
 
+
 from celery import Celery
+
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bookreceipt.settings')
@@ -12,6 +15,12 @@ app = Celery('bookreceipt')
 # - namespace='CELERY' means all celery-related configuration keys
 #   should have a `CELERY_` prefix.
 app.config_from_object('django.conf:settings', namespace='CELERY')
+app.conf.beat_schedule = {
+    "update_prices_daily" : {
+        'task': 'books.tasks.update_loan_amounts',
+        'schedule': 3600 * 24
+    }
+}
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
